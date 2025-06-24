@@ -14,12 +14,13 @@ let page;
 
 form.addEventListener('submit', handleForm);
 
+btnLoadMore.addEventListener('click', handleClick)
+
 async function handleForm(event) {
     event.preventDefault()
 
     page = 1;
     
-    btnLoadMore.addEventListener('click', handleClick)
 
     currentTargetValue = event.target.elements[0].value;
         
@@ -38,7 +39,6 @@ async function handleForm(event) {
     hideLoadMoreButton();
     clearGallery()
     showLoader()
-
 
     try {
         await getImagesByQuery(event.target.elements[0].value)
@@ -111,10 +111,14 @@ async function handleClick() {
         const galleryItem = document.querySelector('.gallery-item');
         const item = galleryItem.getBoundingClientRect();
 
-        window.scrollBy({
-            top: item.height * 2,
-            behavior: "smooth",
-          });
+        if (!(galleryItem)) {
+            return
+        } else {
+                window.scrollBy({
+                    top: item.height * 2,
+                    behavior: "smooth",
+                });
+        }
 
     } catch (error) {
         iziToast.show({

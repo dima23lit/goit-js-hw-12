@@ -7,6 +7,14 @@ const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('#loader');
 const btnLoadMore = document.querySelector('.btn-load-more');
 
+let simpleLightboxnew = new SimpleLightbox('.gallery li a', {
+    captions: true,
+    captionSelector: 'a img',
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionDelay: 250
+});
+
 export function createGallery(images) {
 
     gallery.insertAdjacentHTML('beforeend', images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
@@ -34,17 +42,8 @@ export function createGallery(images) {
            </a>
            </li>`
     ).join(""))
-
-    let simpleLightboxnew = new SimpleLightbox('.gallery li a', {
-        captions: true,
-        captionSelector: 'a img',
-        captionType: 'attr',
-        captionsData: 'alt',
-        captionDelay: 250
-    });
                             
-    simpleLightboxnew.on("show.simplelightbox")
-    simpleLightboxnew.refresh("show.simplelightbox")
+    simpleLightboxnew.refresh()
 }
 
 export function clearGallery() {
