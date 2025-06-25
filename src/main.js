@@ -22,7 +22,7 @@ async function handleForm(event) {
     page = 1;
     
 
-    currentTargetValue = event.target.elements[0].value;
+    currentTargetValue = event.target.elements[0].value.trim();
         
     if (currentTargetValue === "") {
         iziToast.show({
@@ -41,14 +41,20 @@ async function handleForm(event) {
     showLoader()
 
     try {
-        await getImagesByQuery(event.target.elements[0].value)
+        await getImagesByQuery(currentTargetValue, page)
             .then(response => {
                 if (response.hits.length >= 1) {
 
                     createGallery(response.hits)
 
-                    showLoadMoreButton();
-                
+                    const totalPages = Math.ceil(response.totalHits / perPage);
+
+                    if (page < totalPages) {
+                        showLoadMoreButton();
+                    } else {
+                        hideLoadMoreButton();
+                    }
+                    
                 } else {
                     iziToast.show({
                         message: "Sorry, there are no images matching your search query. Please try again!",
@@ -90,11 +96,11 @@ async function handleClick() {
 
         createGallery(data.hits)
 
-        const totalPage = Math.ceil(data.totalHits / perPage);
+        const totalPages = Math.ceil(data.totalHits / perPage);
 
-        console.log(page >= totalPage)
+        console.log(page >= totalPages)
 
-        if (page >= totalPage) {
+        if (page >= totalPages) {
             iziToast.show({
                 message: "We're sorry, but you've reached the end of search results.",
                 position: 'topRight',

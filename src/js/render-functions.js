@@ -35,7 +35,7 @@ export function createGallery(images) {
               <span class="label">${comments}</span>
               </div>
               <div class="field">
-              <span class="value" data-downloads>Downloads<span>
+              <span class="value" data-downloads>Downloads</span>
               <span class="label">${downloads}</span>
               </div>
            </div>
