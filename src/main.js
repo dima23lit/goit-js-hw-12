@@ -52,6 +52,14 @@ async function handleForm(event) {
                     if (page < totalPages) {
                         showLoadMoreButton();
                     } else {
+                        iziToast.show({
+                            message: "We're sorry, but you've reached the end of search results.",
+                            position: 'topRight',
+                            backgroundColor: '#EF4040',
+                            titleColor: '#fff',
+                            messageColor: '#fff',
+                            close: true,
+                        })
                         hideLoadMoreButton();
                     }
                     
