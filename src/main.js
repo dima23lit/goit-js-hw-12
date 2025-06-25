@@ -120,10 +120,10 @@ async function handleClick() {
         if (!(galleryItem)) {
             return
         } else {
-                window.scrollBy({
-                    top: item.height * 2,
-                    behavior: "smooth",
-                });
+            window.scrollBy({
+                top: item.height * 2,
+                behavior: "smooth",
+            });
         }
 
     } catch (error) {
